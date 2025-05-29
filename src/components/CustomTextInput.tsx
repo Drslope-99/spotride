@@ -3,12 +3,14 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 import Colors from "../constants/colors";
 
 type TextInputProps = {
+  label?: string;
   value: string;
-  onChangeText: (text: string) => void;
+  onChangeText?: (text: string) => void;
   placeholder: string;
 };
 
 export default function CustomTextInput({
+  label,
   value,
   onChangeText,
   placeholder,
@@ -37,7 +39,7 @@ export default function CustomTextInput({
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>First Name</Text>
+      <Text style={styles.label}>{label}</Text>
       <TextInput
         style={[
           styles.input,
@@ -58,7 +60,7 @@ export default function CustomTextInput({
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 10,
+    marginVertical: 8,
   },
   label: {
     marginBottom: 6,
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.red,
   },
   error: {
-    marginTop: 5,
+    marginTop: 2,
     fontSize: 13,
     color: Colors.red,
   },

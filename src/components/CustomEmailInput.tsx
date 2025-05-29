@@ -72,7 +72,7 @@ export default function CustomEmailInput({
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 10,
+    marginVertical: 8,
   },
   label: {
     marginBottom: 6,
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.red,
   },
   error: {
-    marginTop: 5,
+    marginTop: 2,
     fontSize: 13,
     color: Colors.red,
   },

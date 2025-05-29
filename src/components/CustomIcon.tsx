@@ -14,7 +14,7 @@ export default function CustomIcon({ src }: IconProps) {
 
 const styles = StyleSheet.create({
   image: {
-    width: 24,
-    height: 24,
+    width: 20,
+    height: 20,
   },
 });

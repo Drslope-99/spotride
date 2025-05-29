@@ -1,35 +1,24 @@
+import CustomButton from "@/src/components/CustomButton";
+import CustomIcon from "@/src/components/CustomIcon";
+import CustomPasswordInput from "@/src/components/CustomPasswordInput";
+import CustomPhoneInput from "@/src/components/CustomPhoneInput";
+import KeyboardAvoidingWrapper from "@/src/components/KeyboardAvoidingWrapper";
+import Colors from "@/src/constants/colors";
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import appleIcon from "../../assets/images/applelogo.png";
-import googleIcon from "../../assets/images/googlelogo.png";
-import CustomButton from "../components/CustomButton";
-import CustomEmailInput from "../components/CustomEmailInput";
-import CustomIcon from "../components/CustomIcon";
-import CustomPasswordInput from "../components/CustomPasswordInput";
-import CustomPhoneInput from "../components/CustomPhoneInput";
-import CustomTextInput from "../components/CustomTextInput";
-import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
-import Colors from "../constants/colors";
+const googleIcon = require("../../../../assets/images/googlelogo.png");
+const appleIcon = require("../../../../assets/images/applelogo.png");
 
-const Login = () => {
+const LoginScreen = () => {
   const [phoneInput, setPhoneInput] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handlePhoneChange = (number: string) => {
     setPhoneInput(number);
   };
 
   const router = useRouter();
-
-  const handleSubmit = () => {
-    const details = { phoneInput, firstName, password, confirmPassword };
-    console.log(details);
-    router.push("/verification");
-  };
 
   return (
     <KeyboardAvoidingWrapper>
@@ -43,32 +32,19 @@ const Login = () => {
             onPhoneChange={handlePhoneChange}
             value={phoneInput}
           />
-          <CustomTextInput
-            placeholder={`First Name`}
-            value={firstName}
-            onChangeText={setFirstName}
-          />
-          <CustomEmailInput
-            placeholder={`Email Address`}
-            value={email}
-            onChangeText={setEmail}
-          />
+
           <CustomPasswordInput
             placeholder={`Enter Password`}
             value={password}
             onChangeText={setPassword}
           />
-          <CustomPasswordInput
-            placeholder={`Confirm Password`}
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
-          />
+          <Link href={"/login/reset"} style={styles.forgotLink} push>
+            Forgot password?
+          </Link>
           <CustomButton
-            title="Continue"
+            title="Log in"
             bgColor={Colors.purple}
             color={Colors.white}
-            onPress={handleSubmit}
-            disabled={false}
           />
         </View>
 
@@ -110,30 +86,35 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    padding: 20,
+    paddingHorizontal: 20,
   },
   section: {},
   title: {
     fontSize: 24,
     fontWeight: 600,
     color: Colors.darkBlue,
-    marginBottom: 10,
+    marginBottom: 5,
   },
   description: {
     color: Colors.text,
     fontSize: 15,
-    marginBottom: 10,
+    marginBottom: 5,
+  },
+
+  forgotLink: {
+    marginBlock: 10,
+    textDecorationLine: "underline",
   },
 
   or: {
     alignSelf: "center",
-    marginVertical: 15,
+    marginVertical: 10,
     fontSize: 18,
   },
   policy: {

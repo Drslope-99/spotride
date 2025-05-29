@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
 } from "react-native";
+import Colors from "../constants/colors";
 
 type Props = {
   children: React.ReactNode;
@@ -35,6 +36,8 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flexGrow: 1,
+    paddingBottom: 40,
+    backgroundColor: Colors.white,
   },
 });
 

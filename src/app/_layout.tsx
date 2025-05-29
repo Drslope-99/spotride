@@ -1,43 +1,16 @@
 import { Stack } from "expo-router";
-import { Text } from "react-native";
-import Colors from "../constants/colors";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 export default function RootLayout() {
   return (
-    <Stack>
-      <Stack.Screen
-        name="index" // Home screen
-        options={{
-          headerShown: false,
-        }}
-      />
-
-      <Stack.Screen
-        name="signup"
-        options={{
-          headerShadowVisible: false,
-          headerTitle: () => (
-            <Text
-              style={{
-                color: Colors.purple,
-                marginLeft: "auto",
-                paddingVertical: 10,
-                paddingHorizontal: 20,
-                fontWeight: "bold",
-                backgroundColor: "#ebf0ff",
-                borderRadius: 100,
-              }}
-            >
-              Log in
-            </Text>
-          ),
-          // headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="verification"
-        options={{ headerShown: true, headerShadowVisible: false }}
-      />
-    </Stack>
+    <SafeAreaProvider>
+      <SafeAreaView style={{ flex: 1 }} edges={["top", "bottom"]}>
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        </Stack>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
