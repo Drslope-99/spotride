@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 export default function OrdersScreen() {
   return (
     <View style={styles.container}>
-      <Text>Orders Page</Text>
+      <Text>Orders tab page</Text>
     </View>
   );
 }

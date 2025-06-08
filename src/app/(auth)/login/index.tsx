@@ -4,7 +4,7 @@ import CustomPasswordInput from "@/src/components/CustomPasswordInput";
 import CustomPhoneInput from "@/src/components/CustomPhoneInput";
 import KeyboardAvoidingWrapper from "@/src/components/KeyboardAvoidingWrapper";
 import Colors from "@/src/constants/colors";
-import { Link, useRouter } from "expo-router";
+import { Link } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 const googleIcon = require("../../../../assets/images/googlelogo.png");
@@ -17,8 +17,6 @@ const LoginScreen = () => {
   const handlePhoneChange = (number: string) => {
     setPhoneInput(number);
   };
-
-  const router = useRouter();
 
   return (
     <KeyboardAvoidingWrapper>
