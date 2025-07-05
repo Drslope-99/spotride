@@ -1,10 +1,10 @@
-import CustomButton from "@/src/components/CustomButton";
-import KeyboardAvoidingWrapper from "@/src/components/KeyboardAvoidingWrapper";
-import VerificationInput from "@/src/components/VerificationInputs";
-import Colors from "@/src/constants/colors";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import CustomButton from "../../../components/CustomButton";
+import KeyboardAvoidingWrapper from "../../../components/KeyboardAvoidingWrapper";
+import VerificationInput from "../../../components/VerificationInputs";
+import Colors from "../../../constants/colors";
 
 const correctCode = "123456";
 
@@ -12,6 +12,10 @@ export default function VerificationScreen() {
   const [code, setCode] = useState(new Array(6).fill(""));
   const [error, setError] = useState(false);
   const router = useRouter();
+
+  const { phone } = useLocalSearchParams();
+
+  const phoneStr = phone as string;
 
   const disabled = code.join("").length < 6;
 
@@ -31,8 +35,8 @@ export default function VerificationScreen() {
           <View style={styles.header}>
             <Text style={styles.title}>Enter verification code</Text>
             <Text style={styles.description}>
-              Enter the verification code sent to your number 090**6 to verify
-              your account
+              Enter the verification code sent to your number{" "}
+              {maskPhoneNumber(phoneStr)} to verify your account
             </Text>
           </View>
           <VerificationInput
@@ -102,3 +106,13 @@ const styles = StyleSheet.create({
     textDecorationColor: "red",
   },
 });
+
+function maskPhoneNumber(phone: string) {
+  if (!phone || phone.length < 7) return phone; // Too short to mask
+
+  const prefix = phone.slice(0, 4); // e.g. "+234"
+  const suffix = phone.slice(-4); // last 4 digits
+  const masked = "*".repeat(phone.length - prefix.length - suffix.length);
+
+  return `${prefix}${masked}${suffix}`;
+}

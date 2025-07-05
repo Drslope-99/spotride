@@ -1,11 +1,18 @@
-import CustomButton from "@/src/components/CustomButton";
-import CustomEmailInput from "@/src/components/CustomEmailInput";
-import Colors from "@/src/constants/colors";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import CustomButton from "../../../components/CustomButton";
+import CustomEmailInput from "../../../components/CustomEmailInput";
+import Colors from "../../../constants/colors";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
+
+  const router = useRouter();
+
+  const handleSubmit = () => {
+    router.push("/(auth)/login/verify");
+  };
 
   return (
     <View style={styles.container}>
@@ -27,6 +34,7 @@ export default function ForgotPassword() {
           bgColor={Colors.darkBlue}
           color={Colors.white}
           disabled={email === ""}
+          onPress={handleSubmit}
         />
       </View>
     </View>

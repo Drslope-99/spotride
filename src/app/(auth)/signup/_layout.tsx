@@ -1,5 +1,5 @@
-import HeaderButton from "@/src/components/HeaderButton";
 import { Stack, useRouter } from "expo-router";
+import HeaderButton from "../../../components/HeaderButton";
 
 export default function SignUpLayout() {
   const router = useRouter();

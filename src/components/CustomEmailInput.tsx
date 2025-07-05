@@ -60,6 +60,7 @@ export default function CustomEmailInput({
         ]}
         placeholder={placeholder}
         placeholderTextColor={Colors.lightGray}
+        keyboardType="email-address"
         onChangeText={handleChange}
         value={value}
         onFocus={handleFocus}

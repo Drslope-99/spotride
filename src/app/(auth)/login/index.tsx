@@ -1,21 +1,59 @@
-import CustomButton from "@/src/components/CustomButton";
-import CustomIcon from "@/src/components/CustomIcon";
-import CustomPasswordInput from "@/src/components/CustomPasswordInput";
-import CustomPhoneInput from "@/src/components/CustomPhoneInput";
-import KeyboardAvoidingWrapper from "@/src/components/KeyboardAvoidingWrapper";
-import Colors from "@/src/constants/colors";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Toast from "react-native-toast-message";
+import CustomButton from "../../../components/CustomButton";
+import CustomIcon from "../../../components/CustomIcon";
+import CustomPasswordInput from "../../../components/CustomPasswordInput";
+import CustomPhoneInput from "../../../components/CustomPhoneInput";
+import KeyboardAvoidingWrapper from "../../../components/KeyboardAvoidingWrapper";
+import Colors from "../../../constants/colors";
+import { useAuth } from "../../../providers/AuthContext";
 const googleIcon = require("../../../../assets/images/googlelogo.png");
 const appleIcon = require("../../../../assets/images/applelogo.png");
 
 const LoginScreen = () => {
   const [phoneInput, setPhoneInput] = useState("");
   const [password, setPassword] = useState("");
+  const [phoneValid, setPhoneValid] = useState(false);
+
+  const { login } = useAuth();
+  const router = useRouter();
 
   const handlePhoneChange = (number: string) => {
     setPhoneInput(number);
+  };
+
+  const showToast = () => {
+    Toast.show({
+      type: "error",
+      text1: "Login failed",
+      text2: "Invalid login credentials!",
+      text1Style: {
+        fontSize: 16,
+        fontWeight: "bold",
+      },
+      text2Style: {
+        fontSize: 12,
+        flexWrap: "wrap",
+      },
+
+      position: "top",
+      visibilityTime: 2000,
+    });
+  };
+
+  const handleLogin = async () => {
+    try {
+      if (!phoneInput || !password || !phoneValid) {
+        showToast();
+      } else {
+        await login(); // update context + AsyncStorage
+        router.replace("/(tabs)");
+      }
+    } catch (error) {
+      console.error("Login failed", error);
+    }
   };
 
   return (
@@ -29,6 +67,7 @@ const LoginScreen = () => {
           <CustomPhoneInput
             onPhoneChange={handlePhoneChange}
             value={phoneInput}
+            onValidityChange={setPhoneValid}
           />
 
           <CustomPasswordInput
@@ -43,6 +82,7 @@ const LoginScreen = () => {
             title="Log in"
             bgColor={Colors.purple}
             color={Colors.white}
+            onPress={handleLogin}
           />
         </View>
 
@@ -68,7 +108,7 @@ const LoginScreen = () => {
         </View>
 
         <View style={styles.policy}>
-          <Text style={styles.policyText}>
+          <Text style={styles.policyText} numberOfLines={2}>
             By proceeding, i agree to all Spotrides{" "}
             <Link style={styles.textLink} href="https://example.com">
               Terms of Service{" "}
@@ -121,7 +161,7 @@ const styles = StyleSheet.create({
   policyText: {
     color: Colors.text,
     textAlign: "center",
-    fontSize: 14,
+    fontSize: 12,
     lineHeight: 20,
     paddingVertical: 20,
   },

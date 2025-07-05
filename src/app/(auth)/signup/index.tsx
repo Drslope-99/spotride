@@ -1,17 +1,20 @@
-import CustomButton from "@/src/components/CustomButton";
-import CustomIcon from "@/src/components/CustomIcon";
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import CustomPhoneInput from "@/src/components/CustomPhoneInput";
-import KeyboardAvoidingWrapper from "@/src/components/KeyboardAvoidingWrapper";
-import Colors from "@/src/constants/colors";
+import Toast from "react-native-toast-message";
+import CustomButton from "../../../components/CustomButton";
+import CustomIcon from "../../../components/CustomIcon";
+import CustomPhoneInput from "../../../components/CustomPhoneInput";
+import KeyboardAvoidingWrapper from "../../../components/KeyboardAvoidingWrapper";
+import Colors from "../../../constants/colors";
 const googleIcon = require("../../../../assets/images/googlelogo.png");
 const appleIcon = require("../../../../assets/images/applelogo.png");
 
 const SignUpScreen = () => {
   const [phoneInput, setPhoneInput] = useState("");
+  const [phoneValid, setPhoneValid] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
 
   const handlePhoneChange = (number: string) => {
     setPhoneInput(number);
@@ -19,8 +22,35 @@ const SignUpScreen = () => {
 
   const router = useRouter();
 
+  const showToast = () => {
+    Toast.show({
+      type: "error",
+      text1: "Invalid Phone input",
+      text2: "Please enter a valid phone number!",
+      text1Style: {
+        fontSize: 15,
+        fontWeight: 700,
+      },
+
+      text2Style: {
+        fontSize: 12,
+      },
+      position: "top",
+      visibilityTime: 2000,
+    });
+  };
+
   const handleSubmit = () => {
-    router.push("/signup/verify");
+    console.log(phoneInput);
+    if (phoneValid) {
+      router.push({
+        pathname: "/signup/verify",
+        params: { phone: "+2349044076884" },
+      });
+    } else {
+      setPhoneError(true);
+      showToast();
+    }
   };
 
   return (
@@ -34,6 +64,8 @@ const SignUpScreen = () => {
           <CustomPhoneInput
             onPhoneChange={handlePhoneChange}
             value={phoneInput}
+            onValidityChange={setPhoneValid}
+            showError={phoneError}
           />
 
           <CustomButton

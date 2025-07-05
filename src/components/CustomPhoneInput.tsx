@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import PhoneInput, {
   isValidPhoneNumber,
@@ -8,17 +8,25 @@ import Colors from "../constants/colors";
 type PhoneInputProps = {
   onPhoneChange: (number: string) => void;
   value: string;
+  onValidityChange: (isValid: boolean) => void;
+  showError?: boolean;
 };
 
 export default function CustomPhoneInput({
   onPhoneChange,
   value,
+  onValidityChange,
+  showError,
 }: PhoneInputProps) {
-  const [selectedCountry, setSelectedCountry] = useState();
+  const [selectedCountry, setSelectedCountry] = useState(null);
 
   function handleSelectedCountry(country: any) {
     setSelectedCountry(country);
   }
+  useEffect(() => {
+    const isValid = isValidPhoneNumber(value, selectedCountry);
+    onValidityChange(isValid);
+  }, [value, selectedCountry, onValidityChange]);
 
   return (
     <View style={{ width: "100%", padding: 0, marginVertical: 20 }}>
@@ -61,7 +69,25 @@ export default function CustomPhoneInput({
         onChangeSelectedCountry={handleSelectedCountry}
         allowZeroAfterCallingCode={false}
       />
-      {/* <View style={{ marginTop: 10 }}>
+      {showError && !isValidPhoneNumber(value, selectedCountry) && (
+        <Text style={styles.errorText}>invalid phone number</Text>
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  label: {
+    paddingVertical: 7,
+  },
+  errorText: {
+    color: Colors.red,
+    fontSize: 12,
+  },
+});
+
+{
+  /* <View style={{ marginTop: 10 }}>
         <Text>
           Country: {`${selectedCountry?.name?.en} (${selectedCountry?.cca2})`}
         </Text>
@@ -72,13 +98,5 @@ export default function CustomPhoneInput({
           isValid:{" "}
           {isValidPhoneNumber(inputValue, selectedCountry) ? "true" : "false"}
         </Text>
-      </View> */}
-    </View>
-  );
+      </View> */
 }
-
-const styles = StyleSheet.create({
-  label: {
-    paddingVertical: 7,
-  },
-});

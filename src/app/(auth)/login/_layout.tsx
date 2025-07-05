@@ -1,5 +1,6 @@
-import HeaderButton from "@/src/components/HeaderButton";
+// import HeaderButton from "@/src/components/HeaderButton";
 import { Stack, useRouter } from "expo-router";
+import HeaderButton from "../../../components/HeaderButton";
 
 export default function LoginLayout() {
   const router = useRouter();
@@ -21,6 +22,10 @@ export default function LoginLayout() {
       />
       <Stack.Screen
         name="reset"
+        options={{ title: "", headerShadowVisible: false }}
+      />
+      <Stack.Screen
+        name="verify"
         options={{ title: "", headerShadowVisible: false }}
       />
     </Stack>

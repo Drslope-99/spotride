@@ -36,7 +36,7 @@ export default function CustomButton({
           borderWidth: 1,
           borderColor: borderCol || "transparent",
         },
-        pressed && { transform: [{ scale: 0.97 }] },
+        pressed && { transform: [{ scale: 0.97 }], opacity: 0.7 },
       ]}
       onPress={onPress}
     >
