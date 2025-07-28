@@ -47,7 +47,7 @@ export default function VerificationScreen() {
           />
           <Text style={styles.resendText}>
             Didn`t receive your code? Resend in
-            <Text style={styles.resendTime}>00:30</Text>
+            <Text style={styles.resendTime}> 00:30</Text>
           </Text>
 
           <Text style={styles.link} onPress={() => router.back()}>

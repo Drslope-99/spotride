@@ -1,6 +1,6 @@
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import Toast from "react-native-toast-message";
 import CustomButton from "../../../components/CustomButton";
 import CustomIcon from "../../../components/CustomIcon";
@@ -58,7 +58,7 @@ const LoginScreen = () => {
 
   return (
     <KeyboardAvoidingWrapper>
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.section}>
           <Text style={styles.title}>Welcome to Spotride!</Text>
           <Text style={styles.description}>
@@ -119,7 +119,7 @@ const LoginScreen = () => {
             </Link>
           </Text>
         </View>
-      </View>
+      </ScrollView>
     </KeyboardAvoidingWrapper>
   );
 };

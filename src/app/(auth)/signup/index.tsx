@@ -45,7 +45,7 @@ const SignUpScreen = () => {
     if (phoneValid) {
       router.push({
         pathname: "/signup/verify",
-        params: { phone: "+2349044076884" },
+        params: { phone: phoneInput },
       });
     } else {
       setPhoneError(true);

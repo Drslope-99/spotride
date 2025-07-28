@@ -46,7 +46,7 @@ export default function CustomButton({
           textAlign: "center",
           color: color || Colors.darkBlue,
           fontSize: 15,
-          fontWeight: 400,
+          fontWeight: 500,
           letterSpacing: 1.1,
         }}
       >

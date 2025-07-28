@@ -1,6 +1,12 @@
 import { Feather } from "@expo/vector-icons";
 import { useState } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Colors from "../constants/colors";
 
 type PasswordProps = {
@@ -57,28 +63,34 @@ export default function CustomPasswordInput({
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Password</Text>
-      <View style={styles.passwordWrapper}>
+      <View
+        style={[
+          styles.passwordWrapper,
+          isFocused && styles.inputFocused,
+          error && styles.inputError,
+        ]}
+      >
         <TextInput
           value={value}
           onChangeText={handleChange}
           placeholder={placeholder}
           placeholderTextColor={Colors.lightGray}
           secureTextEntry={!visible}
-          style={[
-            styles.passwordInput,
-            isFocused && styles.inputFocused,
-            error && styles.inputError,
-          ]}
+          style={styles.passwordInput}
           onFocus={() => setIsFocused(true)}
           onBlur={handleBlur}
         />
-        <Feather
-          name={visible ? "eye" : "eye-off"}
-          size={18}
-          color={Colors.text}
-          style={styles.eyeIcon}
+        <TouchableOpacity
+          style={styles.iconWrapper}
           onPress={() => setVisible((show) => !show)}
-        />
+        >
+          <Feather
+            name={visible ? "eye" : "eye-off"}
+            size={18}
+            color={Colors.text}
+            style={styles.eyeIcon}
+          />
+        </TouchableOpacity>
       </View>
       {error ? <Text style={styles.error}>{error}</Text> : null}
     </View>
@@ -95,19 +107,27 @@ const styles = StyleSheet.create({
   },
   passwordWrapper: {
     position: "relative",
+    flexDirection: "row",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: Colors.borderColor,
   },
   eyeIcon: {
-    position: "absolute",
-    right: 10,
-    top: 15,
+    // position: "absolute",
   },
   passwordInput: {
-    borderWidth: 1,
+    flex: 1,
     paddingHorizontal: 20,
     height: 50,
-    borderColor: Colors.borderColor,
     borderRadius: 8,
     backgroundColor: Colors.backgroundLight,
+  },
+
+  iconWrapper: {
+    width: 40,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
   },
   inputFocused: {
     borderColor: Colors.purple,
