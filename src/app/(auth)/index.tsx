@@ -36,6 +36,7 @@ const Index = () => {
           >
             <Text style={styles.buttonText}>Get started</Text>
           </Pressable>
+
           <Pressable
             style={({ pressed }) => [
               styles.login,
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
   },
   register: {
     flex: 7,
-    backgroundColor: "#3366ff",
+    backgroundColor: Colors.purple,
     alignItems: "center",
     borderRadius: 100,
     padding: 15,
@@ -101,17 +102,3 @@ const styles = StyleSheet.create({
     transform: [{ scale: 0.97 }],
   },
 });
-
-// #101840 --headline
-// #474d66 -- normal text
-// #696f8c -- text muted
-// #8f95b2 -- icons normal
-// #c1c4d6 -- icons
-// #d8dae5 --border
-// #fafbff -- background lighter
-// #52bd94 -- green
-// #ffb020 -- yellow
-// #d14343 -- red
-// #3366ff -- blue
-// #474d66 -- neutral
-// #ffffff -- white

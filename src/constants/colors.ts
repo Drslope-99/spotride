@@ -1,5 +1,5 @@
 const Colors = {
-  purple: "#3366ff",
+  purple: "#5151CD",
   darkBlue: "#101840",
   gray: "#474d66",
   lightGray: "#8f95b2",
@@ -15,17 +15,3 @@ const Colors = {
 };
 
 export default Colors;
-
-// #101840 --headline
-// #474d66 -- normal text
-// #696f8c -- text muted
-// #8f95b2 -- icons normal
-// #c1c4d6 -- icons
-// #d8dae5 --border
-// #fafbff -- background lighter
-// #52bd94 -- green
-// #ffb020 -- yellow
-// #d14343 -- red
-// #3366ff -- blue
-// #474d66 -- neutral
-// #ffffff -- white

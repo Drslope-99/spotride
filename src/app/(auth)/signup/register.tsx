@@ -5,6 +5,7 @@ import CustomEmailInput from "../../../components/CustomEmailInput";
 import CustomPasswordInput from "../../../components/CustomPasswordInput";
 import CustomTextInput from "../../../components/CustomTextInput";
 import KeyboardAvoidingWrapper from "../../../components/KeyboardAvoidingWrapper";
+import TitleText from "../../../components/TitleText";
 import Colors from "../../../constants/colors";
 
 export default function RegisterScreen() {
@@ -22,7 +23,7 @@ export default function RegisterScreen() {
         >
           <View style={styles.content}>
             <View style={styles.header}>
-              <Text style={styles.title}>Were almost done!</Text>
+              <TitleText title="We're almost done!" />
               <Text style={styles.description}>
                 Fill in your details to set up your account and access all
                 features. It’s quick and secure.
@@ -81,12 +82,6 @@ const styles = StyleSheet.create({
   },
   header: {
     marginBottom: 20,
-  },
-  title: {
-    color: Colors.darkBlue,
-    fontSize: 24,
-    fontWeight: 500,
-    marginBottom: 10,
   },
   description: {
     color: Colors.text,

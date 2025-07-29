@@ -7,6 +7,7 @@ import CustomIcon from "../../../components/CustomIcon";
 import CustomPasswordInput from "../../../components/CustomPasswordInput";
 import CustomPhoneInput from "../../../components/CustomPhoneInput";
 import KeyboardAvoidingWrapper from "../../../components/KeyboardAvoidingWrapper";
+import TitleText from "../../../components/TitleText";
 import Colors from "../../../constants/colors";
 import { useAuth } from "../../../providers/AuthContext";
 const googleIcon = require("../../../../assets/images/googlelogo.png");
@@ -60,7 +61,7 @@ const LoginScreen = () => {
     <KeyboardAvoidingWrapper>
       <ScrollView style={styles.container}>
         <View style={styles.section}>
-          <Text style={styles.title}>Welcome to Spotride!</Text>
+          <TitleText title="Welcome to Spotride!" />
           <Text style={styles.description}>
             Please enter your phone number to continue
           </Text>
@@ -133,12 +134,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   section: {},
-  title: {
-    fontSize: 24,
-    fontWeight: 600,
-    color: Colors.darkBlue,
-    marginBottom: 5,
-  },
+
   description: {
     color: Colors.text,
     fontSize: 15,

@@ -28,6 +28,10 @@ export default function LoginLayout() {
         name="verify"
         options={{ title: "", headerShadowVisible: false }}
       />
+      <Stack.Screen
+        name="resetPassword"
+        options={{ title: "", headerShadowVisible: false }}
+      />
     </Stack>
   );
 }

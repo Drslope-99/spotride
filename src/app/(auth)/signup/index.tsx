@@ -7,6 +7,7 @@ import CustomButton from "../../../components/CustomButton";
 import CustomIcon from "../../../components/CustomIcon";
 import CustomPhoneInput from "../../../components/CustomPhoneInput";
 import KeyboardAvoidingWrapper from "../../../components/KeyboardAvoidingWrapper";
+import TitleText from "../../../components/TitleText";
 import Colors from "../../../constants/colors";
 const googleIcon = require("../../../../assets/images/googlelogo.png");
 const appleIcon = require("../../../../assets/images/applelogo.png");
@@ -56,8 +57,8 @@ const SignUpScreen = () => {
   return (
     <KeyboardAvoidingWrapper>
       <View style={styles.container}>
-        <View style={styles.section}>
-          <Text style={styles.title}>Welcome to Spotride!</Text>
+        <View>
+          <TitleText title="Welcome to Spotride!" />
           <Text style={styles.description}>
             Please enter your phone number to continue
           </Text>
@@ -79,7 +80,7 @@ const SignUpScreen = () => {
 
         <Text style={styles.or}>Or</Text>
 
-        <View style={styles.section}>
+        <View>
           <CustomButton
             title="Continue with Google"
             bgColor={Colors.backgroundLight}
@@ -123,13 +124,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingHorizontal: 20,
   },
-  section: {},
-  title: {
-    fontSize: 24,
-    fontWeight: 600,
-    color: Colors.darkBlue,
-    marginBottom: 10,
-  },
+
   description: {
     color: Colors.text,
     fontSize: 15,

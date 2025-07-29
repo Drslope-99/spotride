@@ -13,12 +13,14 @@ type PasswordProps = {
   value: string;
   onChangeText: (text: string) => void;
   placeholder: string;
+  label?: string;
 };
 
 export default function CustomPasswordInput({
   value,
   onChangeText,
   placeholder,
+  label,
 }: PasswordProps) {
   const [visible, setVisible] = useState<boolean>(false);
   const [isFocused, setIsFocused] = useState<boolean>(false);
@@ -62,7 +64,7 @@ export default function CustomPasswordInput({
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Password</Text>
+      <Text style={styles.label}>{label || "Password"}</Text>
       <View
         style={[
           styles.passwordWrapper,
@@ -128,6 +130,8 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: Colors.backgroundLight,
+    borderRadius: 8,
   },
   inputFocused: {
     borderColor: Colors.purple,

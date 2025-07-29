@@ -3,6 +3,7 @@ import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import CustomButton from "../../../components/CustomButton";
 import CustomEmailInput from "../../../components/CustomEmailInput";
+import TitleText from "../../../components/TitleText";
 import Colors from "../../../constants/colors";
 
 export default function ForgotPassword() {
@@ -18,7 +19,7 @@ export default function ForgotPassword() {
     <View style={styles.container}>
       <View style={styles.content}>
         <View style={styles.header}>
-          <Text style={styles.title}>Forgot Password?</Text>
+          <TitleText title="Forgot Password?" />
           <Text style={styles.description}>
             A verification link will be sent to your email for your password
             reset
@@ -31,7 +32,7 @@ export default function ForgotPassword() {
         />
         <CustomButton
           title="Reset Password"
-          bgColor={Colors.darkBlue}
+          bgColor={Colors.purple}
           color={Colors.white}
           disabled={email === ""}
           onPress={handleSubmit}
@@ -51,12 +52,6 @@ const styles = StyleSheet.create({
   },
   header: {
     marginBottom: 20,
-  },
-  title: {
-    color: Colors.darkBlue,
-    fontSize: 24,
-    fontWeight: 500,
-    marginBottom: 10,
   },
   description: {
     color: Colors.text,

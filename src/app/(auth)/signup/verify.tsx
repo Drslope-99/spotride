@@ -3,6 +3,7 @@ import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import CustomButton from "../../../components/CustomButton";
 import KeyboardAvoidingWrapper from "../../../components/KeyboardAvoidingWrapper";
+import TitleText from "../../../components/TitleText";
 import VerificationInput from "../../../components/VerificationInputs";
 import Colors from "../../../constants/colors";
 
@@ -33,7 +34,7 @@ export default function VerificationScreen() {
       <View style={styles.container}>
         <View style={styles.content}>
           <View style={styles.header}>
-            <Text style={styles.title}>Enter verification code</Text>
+            <TitleText title="Enter verification code" />
             <Text style={styles.description}>
               Enter the verification code sent to your number{" "}
               {maskPhoneNumber(phoneStr)} to verify your account
@@ -57,7 +58,7 @@ export default function VerificationScreen() {
         <View style={styles.content}>
           <CustomButton
             title="Verify"
-            bgColor={Colors.darkBlue}
+            bgColor={Colors.purple}
             color={Colors.white}
             onPress={() => handleCodeSubmit(code.join(""))}
             disabled={disabled}
@@ -79,12 +80,7 @@ const styles = StyleSheet.create({
   header: {
     marginBottom: 20,
   },
-  title: {
-    color: Colors.darkBlue,
-    fontSize: 24,
-    fontWeight: 500,
-    marginBottom: 10,
-  },
+
   description: {
     color: Colors.text,
     fontSize: 15,

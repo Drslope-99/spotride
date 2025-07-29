@@ -9,7 +9,7 @@ export default function RootLayout() {
       <SafeAreaProvider>
         <SafeAreaView
           style={{ flex: 1, backgroundColor: "white" }}
-          edges={["top", "bottom"]}
+          edges={["bottom"]}
         >
           <Stack>
             <Stack.Screen name="index" options={{ headerShown: false }} />

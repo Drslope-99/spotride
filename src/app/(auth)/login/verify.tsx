@@ -25,10 +25,10 @@ export default function VerifyEmailScreen() {
         </Text>
       </View>
       <CustomButton
-        title="Return to Login"
+        title="Open Email"
         bgColor={Colors.purple}
         color={Colors.white}
-        onPress={() => router.replace("/(auth)/login")}
+        onPress={() => router.replace("/(auth)/login/resetPassword")}
       />
     </View>
   );
@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   section: {
-    // flex: 0.5,
     alignItems: "center",
   },
   imageContainer: {
