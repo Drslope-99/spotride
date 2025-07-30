@@ -5,7 +5,7 @@ import Colors from "src/constants/colors";
 export default function HomeScreen() {
   return (
     <ScrollView style={styles.container}>
-      <Text>weclome to the home scren</Text>
+      <Text>weclome to the home screen</Text>
     </ScrollView>
   );
 }

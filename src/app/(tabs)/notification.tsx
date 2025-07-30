@@ -1,17 +1,43 @@
-import { useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import {
+  FlatList,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import NotificationItems from "../../components/NotificationItems";
+import TitleText from "../../components/TitleText";
 import Colors from "../../constants/colors";
+import { notifications } from "../../constants/notifications";
+import SIZES from "../../constants/sizes";
 
 const categories: string[] = [
   "all",
   "delivery updates",
   "payments",
-  "promotions",
-  "special offer",
+  "promotions & alerts",
 ];
 
 export default function NotificationScreen() {
   const [menuActive, setMenuActive] = useState("all");
+  const [notificationMessages, setNotificationMessages] = useState([
+    ...notifications,
+  ]);
+
+  useEffect(() => {
+    if (menuActive === "all") {
+      setNotificationMessages([...notifications]);
+    } else {
+      const filtered = [...notifications].filter((notification) =>
+        notification.category
+          .toLocaleLowerCase()
+          .includes(menuActive.toLowerCase())
+      );
+      setNotificationMessages(filtered);
+    }
+  }, [menuActive]);
 
   return (
     <View style={styles.container}>
@@ -45,6 +71,14 @@ export default function NotificationScreen() {
           })}
         </ScrollView>
       </View>
+      <FlatList
+        ListHeaderComponent={<TitleText title="Today" />}
+        style={styles.listWrapper}
+        data={notificationMessages}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <NotificationItems item={item} />}
+        ListEmptyComponent={<Text>empty list</Text>}
+      />
     </View>
   );
 }
@@ -57,8 +91,8 @@ const styles = StyleSheet.create({
   scrollContent: {
     flexDirection: "row",
     height: 60,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingVertical: SIZES.spMd,
+    paddingHorizontal: SIZES.spLg,
     alignItems: "center",
     gap: 10,
   },
@@ -69,12 +103,15 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   menuBtnText: {
-    fontSize: 15,
+    fontSize: 12,
     textTransform: "capitalize",
     color: Colors.text,
   },
   menuActive: {
     borderWidth: 1,
     borderColor: Colors.purple,
+  },
+  listWrapper: {
+    paddingHorizontal: SIZES.spLg,
   },
 });

@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
   },
   errorText: {
-    color: Colors.red,
+    color: Colors.red400,
     fontSize: 12,
   },
 });

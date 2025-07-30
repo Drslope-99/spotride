@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import Colors from "../../constants/colors";
+import SIZES from "../../constants/sizes";
 
 export default function TabsLayout() {
   return (
@@ -19,7 +20,11 @@ export default function TabsLayout() {
           height: 60,
           paddingBottom: 30,
         },
+        tabBarLabelStyle: {
+          fontSize: SIZES.fontSm,
+        },
         tabBarActiveTintColor: Colors.purple,
+        tabBarInactiveTintColor: Colors.lightGray,
         headerTitleAlign: "center",
         headerShadowVisible: false,
       }}
@@ -29,8 +34,6 @@ export default function TabsLayout() {
         options={{
           title: "Home",
           tabBarIcon: ({ size, color }) => (
-            // <Ionicons name="home-outline" size={size} color={color} />
-
             <Ionicons name="home" size={24} color={color} />
           ),
         }}
@@ -57,7 +60,7 @@ export default function TabsLayout() {
       />
 
       <Tabs.Screen
-        name="profile"
+        name="profile/index"
         options={{
           title: "Profile",
           tabBarIcon: ({ size, color }) => (

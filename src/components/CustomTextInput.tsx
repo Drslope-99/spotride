@@ -80,11 +80,11 @@ const styles = StyleSheet.create({
     borderColor: Colors.purple,
   },
   inputError: {
-    borderColor: Colors.red,
+    borderColor: Colors.red200,
   },
   error: {
     marginTop: 2,
     fontSize: 13,
-    color: Colors.red,
+    color: Colors.red400,
   },
 });
