@@ -1,4 +1,3 @@
-import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import CustomButton from "../../../components/CustomButton";
 import Colors from "../../../constants/colors";
@@ -60,7 +59,7 @@ const styles = StyleSheet.create({
   },
   description: {
     textAlign: "center",
-    color: Colors.gray,
+    color: Colors.grayIcon,
     fontSize: 14,
   },
 });
