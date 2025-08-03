@@ -71,6 +71,7 @@ const Colors = {
 
   dark: "#474d66",
   text: "#696f8c",
+  modalBackground: "rgba(0,0,0,.5)",
 };
 
 export default Colors;

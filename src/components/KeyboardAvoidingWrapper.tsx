@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flexGrow: 1,
-    paddingBottom: 40,
     backgroundColor: Colors.white,
   },
 });

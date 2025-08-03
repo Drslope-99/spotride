@@ -5,13 +5,15 @@ import Colors from "../constants/colors";
 type EmailProps = {
   value: string;
   onChangeText: (text: string) => void;
-  placeholder: string;
+  placeholder?: string;
+  disabled?: boolean;
 };
 
 export default function CustomEmailInput({
   value,
   onChangeText,
   placeholder,
+  disabled = false,
 }: EmailProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [error, setError] = useState("");
@@ -65,6 +67,7 @@ export default function CustomEmailInput({
         value={value}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        editable={!disabled}
       />
       {error ? <Text style={styles.error}>{error}</Text> : null}
     </View>

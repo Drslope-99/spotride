@@ -9,13 +9,6 @@
       "android": {
         "buildType": "apk"
       }
-    },
-    "production": {
-      "developmentClient": false,
-      "distribution": "store",
-      "android": {
-        "buildType": "aab"
-      }
     }
   }
 }

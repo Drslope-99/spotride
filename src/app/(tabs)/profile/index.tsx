@@ -1,29 +1,51 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useRouter } from "expo-router";
+import { useState } from "react";
 import {
-  Pressable,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-// import CustomButton from "../../components/CustomButton";
+import ProfileItem from "src/components/ProfileItem";
+import ConfirmAction from "../../../components/ConfirmAction";
+import CustomModal from "../../../components/CustomModal";
 import LineSeperator from "../../../components/LineSeperator";
+import ProfileSection from "../../../components/ProfileSection";
 import Colors from "../../../constants/colors";
 import SIZES from "../../../constants/sizes";
 import { useAuth } from "../../../providers/AuthContext";
 
 export default function ProfileScreen() {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalAction, setModalAction] = useState<"logout" | "delete" | null>(
+    null
+  );
   const tabBarHeight = useBottomTabBarHeight();
-
   const router = useRouter();
+
   const { logout } = useAuth();
 
+  const handleLogoutPress = () => {
+    setModalAction("logout");
+    setModalVisible(true);
+  };
+
+  const handleDeletePress = () => {
+    setModalAction("delete");
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+    setModalAction(null);
+  };
+
   const handleLogout = async () => {
-    await logout(); // clears isLoggedIn from AsyncStorage
-    router.replace("/(auth)/login"); // redirect to login screen
+    await logout();
+    router.replace("/(auth)/login");
   };
 
   return (
@@ -35,7 +57,7 @@ export default function ProfileScreen() {
       }}
     >
       <View style={styles.profile}>
-        <Pressable style={styles.profileImageContainer}>
+        <TouchableOpacity style={styles.profileImageContainer}>
           <Ionicons name="person" size={32} color={Colors.purple} />
           <Ionicons
             name="add-circle"
@@ -43,71 +65,90 @@ export default function ProfileScreen() {
             color={Colors.purple}
             style={styles.iconCircle}
           />
-        </Pressable>
+        </TouchableOpacity>
         <Text style={styles.profileName}>John Doe</Text>
       </View>
 
-      <View style={styles.profileSection}>
-        <TouchableOpacity style={styles.profileLink}>
-          <Ionicons name="person" size={SIZES.fontXl} color={Colors.purple} />
-          <Text style={styles.linkTitle}>Personal information</Text>
-        </TouchableOpacity>
+      <ProfileSection>
+        <ProfileItem
+          onPress={() => router.push("/profile/personalinfo")}
+          iconName="person"
+          iconColor={Colors.purple}
+          title="Personal information"
+        />
         <LineSeperator color={Colors.borderColor} margin={SIZES.spXl} />
-        <TouchableOpacity style={styles.profileLink}>
-          <Ionicons
-            name="lock-closed"
-            size={SIZES.fontXl}
-            color={Colors.dark}
-          />
-          <Text style={styles.linkTitle}>Login and security</Text>
-        </TouchableOpacity>
-      </View>
+        <ProfileItem
+          iconName="lock-closed"
+          iconColor={Colors.dark}
+          title="Login and security"
+        />
+      </ProfileSection>
 
-      <View style={styles.profileSection}>
-        <TouchableOpacity style={styles.profileLink}>
-          <Ionicons name="home" size={SIZES.fontXl} color={Colors.green400} />
-          <Text style={styles.linkTitle}>Add home location</Text>
-        </TouchableOpacity>
-      </View>
+      <ProfileSection>
+        <ProfileItem
+          onPress={() => router.push("/profile/location")}
+          iconName="home"
+          iconColor={Colors.green400}
+          title="Add home location"
+        />
+      </ProfileSection>
 
-      <View style={styles.profileSection}>
-        <TouchableOpacity style={styles.profileLink}>
-          <Ionicons name="card" size={SIZES.fontXl} color={Colors.yellow400} />
-          <Text style={styles.linkTitle}>Payments Method</Text>
-        </TouchableOpacity>
+      <ProfileSection>
+        <ProfileItem
+          iconName="card"
+          iconColor={Colors.yellow400}
+          title="Payments method"
+        />
         <LineSeperator color={Colors.borderColor} margin={SIZES.spXl} />
-        <TouchableOpacity style={styles.profileLink}>
-          <Ionicons name="globe" size={SIZES.fontXl} color={Colors.grayIcon} />
-          <Text style={styles.linkTitle}>Language (english)</Text>
-        </TouchableOpacity>
+        <ProfileItem
+          onPress={() => router.push("/profile/language")}
+          iconName="globe"
+          title="Language (english)"
+        />
         <LineSeperator color={Colors.borderColor} margin={SIZES.spXl} />
-        <TouchableOpacity style={styles.profileLink}>
-          <Ionicons
-            name="document"
-            size={SIZES.fontXl}
-            color={Colors.grayIcon}
-          />
-          <Text style={styles.linkTitle}>Terms and conditions</Text>
-        </TouchableOpacity>
-      </View>
+        <ProfileItem iconName="document" title="Terms and conditions" />
+      </ProfileSection>
 
-      <View style={styles.profileSection}>
-        <TouchableOpacity style={styles.profileLink} onPress={handleLogout}>
-          <Ionicons
-            name="exit-outline"
-            size={SIZES.fontXl}
-            color={Colors.red400}
-          />
-          <Text style={[styles.linkTitle, styles.titleRed]}>Log out</Text>
-        </TouchableOpacity>
+      <ProfileSection>
+        <ProfileItem
+          onPress={handleLogoutPress}
+          iconName="exit-outline"
+          iconColor={Colors.red400}
+          title="Log out"
+          titleStyle={{ color: Colors.red400, fontWeight: 500 }}
+        />
+
         <LineSeperator color={Colors.borderColor} margin={SIZES.spXl} />
-        <TouchableOpacity style={styles.profileLink}>
-          <Ionicons name="trash" size={SIZES.fontXl} color={Colors.red400} />
-          <Text style={[styles.linkTitle, styles.titleRed]}>
-            Delete account
-          </Text>
-        </TouchableOpacity>
-      </View>
+        <ProfileItem
+          onPress={handleDeletePress}
+          iconName="trash"
+          iconColor={Colors.red400}
+          title="Delete account"
+          titleStyle={{ color: Colors.red400, fontWeight: 500 }}
+        />
+      </ProfileSection>
+      <CustomModal show={modalVisible} onClose={closeModal}>
+        {modalAction === "logout" && (
+          <ConfirmAction
+            iconName="exit-outline"
+            iconColor={Colors.red400}
+            iconBgColor={Colors.red100}
+            onConfirm={handleLogout}
+            message="Are you sure you want to log out?"
+            buttonText="Yes, log me out"
+          />
+        )}
+        {modalAction === "delete" && (
+          <ConfirmAction
+            iconName="trash"
+            iconColor={Colors.red400}
+            iconBgColor={Colors.red100}
+            onConfirm={handleLogout}
+            message="Are you sure you want to delete your account?"
+            buttonText="Yes, delete my account"
+          />
+        )}
+      </CustomModal>
     </ScrollView>
   );
 }
@@ -141,27 +182,5 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     right: 0,
-  },
-  profileSection: {
-    backgroundColor: Colors.backgroundLight,
-    borderWidth: 0.5,
-    borderColor: Colors.borderColor,
-    paddingHorizontal: SIZES.spLg,
-    paddingVertical: SIZES.spLg,
-    borderRadius: SIZES.radXl,
-    marginVertical: SIZES.spLg,
-  },
-  profileLink: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: SIZES.spLg,
-  },
-  linkTitle: {
-    color: Colors.dark,
-    fontWeight: 400,
-  },
-  titleRed: {
-    color: Colors.red400,
-    fontWeight: 500,
   },
 });

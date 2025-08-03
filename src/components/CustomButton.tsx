@@ -1,5 +1,6 @@
 import { Pressable, Text } from "react-native";
 import Colors from "../constants/colors";
+import SIZES from "../constants/sizes";
 
 type ButtonProps = {
   children?: React.ReactNode;
@@ -45,7 +46,7 @@ export default function CustomButton({
         style={{
           textAlign: "center",
           color: color || Colors.darkBlue,
-          fontSize: 15,
+          fontSize: SIZES.fontMd,
           fontWeight: 500,
           letterSpacing: 1.1,
         }}

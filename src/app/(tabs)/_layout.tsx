@@ -8,7 +8,7 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         headerTitleStyle: {
-          fontSize: 20,
+          fontSize: SIZES.fontLg,
           fontWeight: "light",
           color: Colors.dark,
         },
@@ -56,13 +56,14 @@ export default function TabsLayout() {
           tabBarIcon: ({ size, color }) => (
             <Ionicons name="notifications" size={24} color={color} />
           ),
+          tabBarBadge: 3,
         }}
       />
 
       <Tabs.Screen
-        name="profile/index"
+        name="profile"
         options={{
-          title: "Profile",
+          headerShown: false,
           tabBarIcon: ({ size, color }) => (
             <Ionicons name="person-circle-outline" size={24} color={color} />
           ),

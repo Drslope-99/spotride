@@ -119,9 +119,9 @@ const styles = StyleSheet.create({
     color: Colors.darkBlue,
   },
   filledInput: {
-    borderColor: Colors.green,
+    borderColor: Colors.violet400,
   },
   errorInput: {
-    borderColor: Colors.red,
+    borderColor: Colors.red400,
   },
 });

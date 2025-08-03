@@ -6,7 +6,8 @@ type TextInputProps = {
   label?: string;
   value: string;
   onChangeText?: (text: string) => void;
-  placeholder: string;
+  placeholder?: string;
+  disabled?: boolean;
 };
 
 export default function CustomTextInput({
@@ -14,6 +15,7 @@ export default function CustomTextInput({
   value,
   onChangeText,
   placeholder,
+  disabled = false,
 }: TextInputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [error, setError] = useState("");
@@ -50,6 +52,7 @@ export default function CustomTextInput({
         placeholderTextColor={Colors.lightGray}
         onChangeText={onChangeText}
         value={value}
+        editable={!disabled}
         onFocus={() => setIsFocused(true)}
         onBlur={handleBlur}
       />
