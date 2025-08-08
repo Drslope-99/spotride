@@ -12,7 +12,7 @@ export default function LineSeperator({ color, margin }: LineSeperatorProps) {
       style={{
         borderWidth: 0.3,
         marginVertical: margin || 0,
-        borderColor: Colors.grayIcon || color,
+        borderColor: color || Colors.grayIcon,
       }}
     ></View>
   );
