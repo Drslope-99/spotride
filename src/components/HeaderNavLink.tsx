@@ -10,6 +10,7 @@ type LinkProps = {
   bgColor: string;
   iconName: FeatherIconName;
   title?: string;
+  onPress?: () => void;
 };
 
 export default function HeaderNavLink({
@@ -17,12 +18,14 @@ export default function HeaderNavLink({
   bgColor,
   iconName,
   title,
+  onPress,
 }: LinkProps) {
   return (
     <TouchableOpacity
       style={{
         alignItems: "center",
       }}
+      onPress={onPress}
     >
       <Feather
         name={iconName}
