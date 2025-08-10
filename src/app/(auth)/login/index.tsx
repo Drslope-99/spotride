@@ -50,7 +50,7 @@ const LoginScreen = () => {
         showToast();
       } else {
         await login(); // update context + AsyncStorage
-        router.replace("/(tabs)");
+        router.replace("/(tabs)/home");
       }
     } catch (error) {
       console.error("Login failed", error);
