@@ -1,6 +1,6 @@
 import BottomSheet, { BottomSheetFlatList } from "@gorhom/bottom-sheet";
 import { useRouter } from "expo-router";
-import React, { useCallback, useMemo, useRef } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import CustomSearchInput from "../../../components/CustomSearchInput";
@@ -10,6 +10,7 @@ import LineSeperator from "../../../components/LineSeperator";
 import Colors from "../../../constants/colors";
 
 export default function HomeScreen() {
+  const [input, setInput] = useState("");
   // ref
   const bottomSheetRef = useRef<BottomSheet>(null);
 
@@ -18,6 +19,14 @@ export default function HomeScreen() {
   // callbacks
   const handleSheetChanges = useCallback((index: number) => {
     console.log("handleSheetChanges", index);
+  }, []);
+
+  const handleFocusChange = useCallback((isFocused: boolean) => {
+    if (isFocused) {
+      bottomSheetRef.current?.snapToIndex(2); // e.g. full height index
+    } else {
+      bottomSheetRef.current?.snapToIndex(1); // collapse or half
+    }
   }, []);
 
   const router = useRouter();
@@ -30,6 +39,7 @@ export default function HomeScreen() {
         snapPoints={["40%", "90%"]}
         ref={bottomSheetRef}
         onChange={handleSheetChanges}
+        keyboardBehavior="extend"
         backgroundStyle={{
           elevation: 10,
         }}
@@ -45,7 +55,12 @@ export default function HomeScreen() {
           contentContainerStyle={styles.sheetContainer}
           ListHeaderComponent={
             <HeaderHomeComponent>
-              <CustomSearchInput placeholder="Deliver to?" />
+              <CustomSearchInput
+                placeholder="Deliver to?"
+                value={input}
+                onChangeText={setInput}
+                onFocusChange={handleFocusChange}
+              />
               <View style={styles.navContainer}>
                 <HeaderNavLink
                   iconName="package"

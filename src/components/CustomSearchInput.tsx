@@ -6,11 +6,28 @@ import Colors from "../constants/colors";
 
 type SearchInputProps = {
   placeholder: string;
+  value: string;
+  onChangeText: (text: string) => void;
+  onFocusChange?: (isFocused: boolean) => void;
 };
 
-export default function CustomSearchInput({ placeholder }: SearchInputProps) {
+export default function CustomSearchInput({
+  placeholder,
+  onChangeText,
+  value,
+  onFocusChange,
+}: SearchInputProps) {
   const [isFocused, setIsFocused] = useState(false);
-  const [input, setInput] = useState("");
+
+  const handleFocus = () => {
+    setIsFocused(true);
+    onFocusChange?.(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+    onFocusChange?.(false);
+  };
 
   return (
     <View style={styles.container}>
@@ -22,10 +39,10 @@ export default function CustomSearchInput({ placeholder }: SearchInputProps) {
         style={[styles.input, isFocused && styles.inputFocused]}
         placeholder={placeholder}
         placeholderTextColor={Colors.lightGray}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        value={input}
-        onChangeText={setInput}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        value={value}
+        onChangeText={onChangeText}
       />
     </View>
   );

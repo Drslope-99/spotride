@@ -1,4 +1,5 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import CustomButton from "../../../components/CustomButton";
 import CustomSearchInput from "../../../components/CustomSearchInput";
@@ -7,11 +8,16 @@ import Colors from "../../../constants/colors";
 import SIZES from "../../../constants/sizes";
 
 export default function HomeLocationScreen() {
+  const [searchInput, setSearchInput] = useState("");
   return (
     <KeyboardAvoidingWrapper>
       <View style={styles.container}>
         <View style={styles.locationBar}>
-          <CustomSearchInput placeholder="Type in your address" />
+          <CustomSearchInput
+            placeholder="Type in your address"
+            value={searchInput}
+            onChangeText={setSearchInput}
+          />
           <TouchableOpacity style={styles.locate}>
             <Ionicons name="locate" size={24} color={Colors.purple} />
             <Text style={styles.locateText}>Pick address over the map</Text>

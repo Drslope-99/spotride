@@ -1,60 +1,37 @@
-// import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-// import { useNavigation } from "expo-router";
-// import { useLayoutEffect } from "react";
-// import { Text, View } from "react-native";
-
-// export default function SendPackageScreen() {
-//   const navigation = useNavigation();
-//   const tabBarHeight = useBottomTabBarHeight();
-
-//   useLayoutEffect(() => {
-//     navigation.getParent()?.setOptions({
-//       tabBarStyle: { display: "none" },
-//     });
-
-//     return () =>
-//       navigation.getParent()?.setOptions({
-//         tabBarStyle: { height: tabBarHeight, paddingBottom: 30 },
-//       });
-//   }, [navigation]);
-
-//   return (
-//     <View>
-//       <Text>SendPackageScreen</Text>
-//     </View>
-//   );
-// }
-
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-import { useNavigation } from "expo-router";
-import { useLayoutEffect, useRef } from "react";
-import { Text, View } from "react-native";
+import { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import KeyboardAvoidingWrapper from "src/components/KeyboardAvoidingWrapper";
+import LocationSearchInput from "../../../components/LocationSearchInput";
+import PickMapAddressBtn from "../../../components/PickMapAddressBtn";
+import Colors from "../../../constants/colors";
+import SIZES from "../../../constants/sizes";
 
 export default function SendPackageScreen() {
-  const navigation = useNavigation();
-  const tabBarHeight = useBottomTabBarHeight();
-
-  // Store the original style once
-  const originalTabBarStyle = useRef({
-    height: tabBarHeight,
-    paddingBottom: 30,
-  });
-
-  useLayoutEffect(() => {
-    navigation.getParent()?.setOptions({
-      tabBarStyle: { display: "none" },
-    });
-
-    return () => {
-      navigation.getParent()?.setOptions({
-        tabBarStyle: originalTabBarStyle.current,
-      });
-    };
-  }, [navigation]);
-
+  const [pickupLocation, setPickupLocation] = useState("");
+  const [dropoffLocation, setDropoffLocation] = useState("");
   return (
-    <View>
-      <Text>SendPackageScreen</Text>
-    </View>
+    <KeyboardAvoidingWrapper>
+      <View style={styles.container}>
+        <LocationSearchInput
+          pickup={pickupLocation}
+          dropoff={dropoffLocation}
+          onChangePickup={setPickupLocation}
+          onChangeDropoff={setDropoffLocation}
+        />
+        <PickMapAddressBtn
+          title="pick address via map"
+          background={Colors.backgroundLight}
+          borderCol={Colors.borderColor}
+        />
+      </View>
+    </KeyboardAvoidingWrapper>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.white,
+    flex: 1,
+    padding: SIZES.spMd,
+  },
+});
