@@ -30,13 +30,13 @@ export default function CustomSearchInput({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, isFocused && styles.inputFocus]}>
       <View style={styles.iconBox}>
         <Ionicons name="search" size={SIZES.fontXl} color={Colors.grayIcon} />
       </View>
 
       <TextInput
-        style={[styles.input, isFocused && styles.inputFocused]}
+        style={styles.input}
         placeholder={placeholder}
         placeholderTextColor={Colors.lightGray}
         onFocus={handleFocus}
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
     color: Colors.text,
   },
-  inputFocused: {
-    // borderColor: Colors.purple,
+  inputFocus: {
+    borderColor: Colors.violet400,
   },
 });
